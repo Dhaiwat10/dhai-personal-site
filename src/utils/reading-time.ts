@@ -18,9 +18,9 @@ export function calculateReadingTime(markdown: string): number {
     // Remove inline code (backticks)
     .replace(/`[^`]*`/g, '')
     // Remove images
-    .replace(/!\[[^\]]*\]\([^\)]*\)/g, '')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
     // Remove links but keep link text
-    .replace(/\[([^\]]*)\]\([^\)]*\)/g, '$1')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
     // Remove bold/italic markers
     .replace(/(\*\*|__)(.*?)\1/g, '$2')
     .replace(/(\*|_)(.*?)\1/g, '$2')

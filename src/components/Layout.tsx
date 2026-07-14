@@ -1,22 +1,27 @@
+import { Suspense } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { BLOG_PATH } from "../site";
 import SEO from "./SEO";
 import StructuredData from "./StructuredData";
 
 function Layout() {
   const location = useLocation();
-
-  const isHomePage = location.pathname === '/';
-  const isBlogPage = location.pathname === '/blog' || location.pathname.startsWith('/blog/');
+  const isHomePage = location.pathname === "/";
+  const isBlogIndex =
+    location.pathname === "/blog" || location.pathname === BLOG_PATH;
 
   return (
     <div className="min-h-screen bg-black transition-colors">
-      <SEO 
-        title={isHomePage ? undefined : isBlogPage ? 'Blog' : undefined}
-        description={isHomePage ? undefined : isBlogPage ? 'Blog posts by Dhaiwat Pandya about Ethereum development and other topics.' : undefined}
-        type={isBlogPage ? 'article' : 'website'}
+      <SEO
+        title={isBlogIndex ? "Blog" : undefined}
+        description={
+          isBlogIndex
+            ? "Blog posts by Dhaiwat Pandya about Ethereum development and other topics."
+            : undefined
+        }
       />
       {isHomePage && <StructuredData type="person" />}
-      {isBlogPage && <StructuredData type="blog" />}
+      {isBlogIndex && <StructuredData type="blog" />}
       
       <nav className="sticky top-0 bg-black border-b border-gray-800 z-50">
         <div className="container mx-auto px-4 py-4">
@@ -40,7 +45,7 @@ function Layout() {
                 Home
               </Link>
               <Link
-                to="/blog"
+                to={BLOG_PATH}
                 className={`font-medium transition-colors ${
                   location.pathname.startsWith("/blog")
                     ? "text-white"
@@ -55,7 +60,11 @@ function Layout() {
       </nav>
 
       <main className="container mx-auto px-4 py-8">
-        <Outlet />
+        <Suspense
+          fallback={<div className="py-24 text-center text-gray-400">Loading page…</div>}
+        >
+          <Outlet />
+        </Suspense>
       </main>
 
       <footer className="bg-black border-t border-gray-800 mt-16">

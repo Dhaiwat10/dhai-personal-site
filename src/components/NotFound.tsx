@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
 import PageTransition from './PageTransition';
+import SEO from "./SEO";
 
 function NotFound() {
   return (
     <PageTransition>
+      <SEO
+        title="Page not found"
+        description="The requested page could not be found."
+      />
       <div className="flex flex-col items-center justify-center py-24 text-center">
         <h1 className="text-7xl font-bold text-white mb-4">404</h1>
         <p className="text-xl text-gray-400 mb-8">

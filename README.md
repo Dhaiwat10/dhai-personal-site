@@ -53,6 +53,13 @@ bun run build
 
 Outputs production build to `dist/`.
 
+The build refreshes cached GitHub and Letterboxd snapshots, then emits physical
+blog route documents such as `dist/blog/my-post/index.html`. Each generated
+document includes canonical, Open Graph, Twitter, and JSON-LD metadata, so it
+can be served directly by IPFS gateways without hash routing. If a third-party
+feed is unavailable during a later build, the last successful committed cache
+is retained.
+
 ### Preview Build
 
 ```bash

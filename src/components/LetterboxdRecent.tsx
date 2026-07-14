@@ -61,8 +61,7 @@ export function LetterboxdRecent({
       <div className="text-center py-8">
         <p className="text-red-400">Error: {error}</p>
         <p className="text-sm text-gray-400 mt-2">
-          Make sure the Letterboxd username is correct and the profile is
-          public.
+          Cached Letterboxd activity is temporarily unavailable.
         </p>
       </div>
     );
@@ -93,6 +92,8 @@ export function LetterboxdRecent({
                   src={movie.posterUrl}
                   alt={`${movie.title} poster`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                  loading="lazy"
+                  decoding="async"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-600">

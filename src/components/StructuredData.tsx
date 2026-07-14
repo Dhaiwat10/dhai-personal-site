@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
-import type { BlogPost } from '../types/blog';
-
-const SITE_URL = 'https://dhai.eth.limo';
+import { useEffect } from "react";
+import type { BlogPost } from "../types/blog";
+import { BLOG_PATH, SITE_URL, articlePath, canonicalUrl } from "../site";
 
 interface StructuredDataProps {
   type: 'person' | 'blog' | 'article';
@@ -10,62 +9,61 @@ interface StructuredDataProps {
 
 function StructuredData({ type, article }: StructuredDataProps) {
   useEffect(() => {
-    // Remove existing structured data script
-    const existingScript = document.querySelector('script[type="application/ld+json"]');
-    if (existingScript) {
-      existingScript.remove();
-    }
+    document
+      .querySelectorAll('script[type="application/ld+json"]')
+      .forEach((script) => script.remove());
 
     let jsonLd: object;
 
-    if (type === 'person') {
+    if (type === "person") {
       jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'Person',
-        name: 'Dhaiwat Pandya',
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Dhaiwat Pandya",
         url: SITE_URL,
         sameAs: [
-          'https://x.com/dhaiwat10',
-          'https://github.com/dhaiwat10',
-          'https://farcaster.xyz/dhai.eth',
+          "https://x.com/dhaiwat10",
+          "https://github.com/dhaiwat10",
+          "https://farcaster.xyz/dhai.eth",
         ],
-        jobTitle: 'Ethereum Developer',
-        description: 'Ethereum Developer. Relentlessly Curious.',
+        jobTitle: "Ethereum Developer",
+        description: "Ethereum Developer. Relentlessly Curious.",
       };
-    } else if (type === 'blog') {
+    } else if (type === "blog") {
       jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'Blog',
-        name: 'dhai.eth Blog',
-        url: `${SITE_URL}#/blog`,
-        description: 'Blog posts by Dhaiwat Pandya about Ethereum development and other topics.',
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        name: "dhai.eth Blog",
+        url: canonicalUrl(BLOG_PATH),
+        description:
+          "Blog posts by Dhaiwat Pandya about Ethereum development and other topics.",
         author: {
-          '@type': 'Person',
-          name: 'Dhaiwat Pandya',
+          "@type": "Person",
+          name: "Dhaiwat Pandya",
         },
       };
-    } else if (type === 'article' && article) {
-      const articleUrl = `${SITE_URL}#/blog/${article.id}`;
+    } else if (type === "article" && article) {
+      const articleUrl = canonicalUrl(articlePath(article.id));
       jsonLd = {
-        '@context': 'https://schema.org',
-        '@graph': [
+        "@context": "https://schema.org",
+        "@graph": [
           {
-            '@type': 'BreadcrumbList',
+            "@type": "BreadcrumbList",
             itemListElement: [
               {
-                '@type': 'ListItem',
+                "@type": "ListItem",
                 position: 1,
-                name: 'Home',
+                name: "Home",
                 item: SITE_URL,
               },
               {
-                '@type': 'ListItem',
+                "@type": "ListItem",
                 position: 2,
-                name: 'Blog',
-                item: `${SITE_URL}#/blog`,
+                name: "Blog",
+                item: canonicalUrl(BLOG_PATH),
               },
               {
-                '@type': 'ListItem',
+                "@type": "ListItem",
                 position: 3,
                 name: article.title,
                 item: articleUrl,
@@ -73,24 +71,24 @@ function StructuredData({ type, article }: StructuredDataProps) {
             ],
           },
           {
-            '@type': 'BlogPosting',
+            "@type": "BlogPosting",
             headline: article.title,
             description: article.excerpt,
             url: articleUrl,
             datePublished: article.date,
             dateModified: article.date,
             author: {
-              '@type': 'Person',
-              name: 'Dhaiwat Pandya',
+              "@type": "Person",
+              name: "Dhaiwat Pandya",
               url: SITE_URL,
             },
             publisher: {
-              '@type': 'Person',
-              name: 'Dhaiwat Pandya',
+              "@type": "Person",
+              name: "Dhaiwat Pandya",
             },
-            ...(article.tags && article.tags.length > 0 && {
-              keywords: article.tags.join(', '),
-            }),
+            ...(article.tags.length > 0
+              ? { keywords: article.tags.join(", ") }
+              : {}),
           },
         ],
       };
@@ -98,18 +96,15 @@ function StructuredData({ type, article }: StructuredDataProps) {
       return;
     }
 
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
     script.text = JSON.stringify(jsonLd);
     document.head.appendChild(script);
 
     return () => {
-      const scriptToRemove = document.querySelector('script[type="application/ld+json"]');
-      if (scriptToRemove) {
-        scriptToRemove.remove();
-      }
+      script.remove();
     };
-  }, [type, article]);
+  }, [article, type]);
 
   return null;
 }

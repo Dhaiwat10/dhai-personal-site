@@ -1,5 +1,6 @@
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { blogPosts } from '../data/blog-posts';
+import { BLOG_PATH, articlePath } from "../site";
 import { useMemo, useState } from 'react';
 import PageTransition from './PageTransition';
 
@@ -40,7 +41,7 @@ function BlogList() {
   }, [selectedTag, searchQuery]);
 
   const clearFilter = () => {
-    navigate('/blog');
+    navigate(BLOG_PATH);
     setSearchQuery('');
   };
 
@@ -73,7 +74,7 @@ function BlogList() {
             {allTags.map((tag) => (
               <Link
                 key={tag}
-                to={`/blog?tag=${encodeURIComponent(tag)}`}
+                to={`${BLOG_PATH}?tag=${encodeURIComponent(tag)}`}
                 className={`px-3 py-1 text-sm rounded-md border transition-all ${
                   selectedTag === tag
                     ? 'bg-gray-600 text-white border-gray-500'
@@ -129,7 +130,7 @@ function BlogList() {
               itemType="https://schema.org/BlogPosting"
               className="animate-slide-up rounded-lg border border-gray-800 p-6 hover:border-gray-700 transition-all bg-gray-900/50"
             >
-              <Link to={`/blog/${post.id}`}>
+              <Link to={articlePath(post.id)}>
                 <h2 itemProp="headline" className="text-2xl font-bold text-white mb-2 hover:text-gray-300 transition-colors">
                   {post.title}
                 </h2>
@@ -151,7 +152,7 @@ function BlogList() {
                 {post.tags.map((tag) => (
                   <Link
                     key={tag}
-                    to={`/blog?tag=${encodeURIComponent(tag)}`}
+                    to={`${BLOG_PATH}?tag=${encodeURIComponent(tag)}`}
                     className={`px-3 py-1 text-sm rounded-md border transition-all ${
                       selectedTag === tag
                         ? 'bg-gray-600 text-white border-gray-500'
@@ -164,7 +165,7 @@ function BlogList() {
               </div>
               
               <Link 
-                to={`/blog/${post.id}`}
+                to={articlePath(post.id)}
                 className="text-gray-400 hover:text-white font-medium transition-colors inline-flex items-center"
               >
                 Read more →

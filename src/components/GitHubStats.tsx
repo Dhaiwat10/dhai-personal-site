@@ -49,7 +49,7 @@ export function GitHubStats({ username }: GitHubStatsProps) {
       <div className="text-center py-8">
         <p className="text-red-400">Error: {error}</p>
         <p className="text-sm text-gray-400 mt-2">
-          Unable to fetch GitHub statistics. Please try again later.
+          Cached GitHub activity is temporarily unavailable.
         </p>
       </div>
     );

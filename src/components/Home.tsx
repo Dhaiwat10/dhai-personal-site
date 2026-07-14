@@ -1,25 +1,24 @@
-import { useEffect, useRef } from "react";
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
+import { BLOG_PATH, articlePath } from "../site";
 import { blogPosts } from "../data/blog-posts";
-import { LetterboxdRecent } from "./LetterboxdRecent";
-import { GitHubStats } from "./GitHubStats";
-import TravelMap from "./TravelMap";
+import DeferredContent from "./DeferredContent";
 import PageTransition from "./PageTransition";
 
+const GitHubStats = lazy(() =>
+  import("./GitHubStats").then(({ GitHubStats: Component }) => ({
+    default: Component,
+  })),
+);
+const LetterboxdRecent = lazy(() =>
+  import("./LetterboxdRecent").then(({ LetterboxdRecent: Component }) => ({
+    default: Component,
+  })),
+);
+const MotorsportsVideo = lazy(() => import("./MotorsportsVideo"));
+const TravelMap = lazy(() => import("./TravelMap"));
+
 function Home() {
-  const motorsportsVideoRef = useRef<HTMLVideoElement | null>(null);
-
-  useEffect(() => {
-    const video = motorsportsVideoRef.current;
-    if (!video) return;
-
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Autoplay might be blocked; user can start playback manually.
-      });
-    }
-  }, []);
 
   const latestPosts = [...blogPosts]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -75,7 +74,7 @@ function Home() {
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-2xl font-bold text-white">Latest Posts</h3>
           <Link
-            to="/blog"
+            to={BLOG_PATH}
             className="text-gray-400 hover:text-white font-medium transition-colors"
           >
             View all →
@@ -89,7 +88,7 @@ function Home() {
               style={{ animationDelay: `${index * 0.1}s` }}
               className="animate-slide-up rounded-lg border border-gray-800 p-6 hover:border-gray-700 transition-all bg-gray-900/50"
             >
-              <Link to={`/blog/${post.id}`}>
+              <Link to={articlePath(post.id)}>
                 <h4 className="text-xl font-bold text-white mb-2 hover:text-gray-300 transition-colors">
                   {post.title}
                 </h4>
@@ -108,7 +107,7 @@ function Home() {
               </p>
 
               <Link
-                to={`/blog/${post.id}`}
+                to={articlePath(post.id)}
                 className="text-gray-400 hover:text-white font-medium text-sm transition-colors inline-flex items-center"
               >
                 Read more →
@@ -136,7 +135,16 @@ function Home() {
           </p>
         </div>
 
-        <GitHubStats username="dhaiwat10" />
+        <DeferredContent
+          rootMargin="240px"
+          fallback={<div className="h-48 rounded-lg border border-gray-800 bg-gray-900/50 animate-pulse" />}
+        >
+          <Suspense
+            fallback={<div className="h-48 rounded-lg border border-gray-800 bg-gray-900/50 animate-pulse" />}
+          >
+            <GitHubStats username="dhaiwat10" />
+          </Suspense>
+        </DeferredContent>
       </section>
 
       <section className="mt-16">
@@ -149,18 +157,16 @@ function Home() {
           </p>
         </div>
 
-        <div className="overflow-hidden rounded-xl border border-gray-800 bg-black aspect-video">
-          <video
-            ref={motorsportsVideoRef}
-            className="w-full h-full object-cover"
-            src="/vroom.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            controls
-          />
-        </div>
+        <DeferredContent
+          rootMargin="160px"
+          fallback={<div className="aspect-video rounded-xl border border-gray-800 bg-gray-900/50" />}
+        >
+          <Suspense
+            fallback={<div className="aspect-video rounded-xl border border-gray-800 bg-gray-900/50" />}
+          >
+            <MotorsportsVideo />
+          </Suspense>
+        </DeferredContent>
       </section>
 
       <section className="mt-16">
@@ -181,7 +187,16 @@ function Home() {
           </p>
         </div>
 
-        <LetterboxdRecent username="Dhaiwat" limit={6} />
+        <DeferredContent
+          rootMargin="240px"
+          fallback={<div className="h-72 rounded-lg border border-gray-800 bg-gray-900/50 animate-pulse" />}
+        >
+          <Suspense
+            fallback={<div className="h-72 rounded-lg border border-gray-800 bg-gray-900/50 animate-pulse" />}
+          >
+            <LetterboxdRecent username="Dhaiwat" limit={6} />
+          </Suspense>
+        </DeferredContent>
       </section>
 
       <section id="travels" className="mt-16">
@@ -192,7 +207,16 @@ function Home() {
           </p>
         </div>
 
-        <TravelMap />
+        <DeferredContent
+          rootMargin="160px"
+          fallback={<div className="h-[400px] md:h-[500px] lg:h-[600px] rounded-xl border border-gray-800 bg-gray-900/50" />}
+        >
+          <Suspense
+            fallback={<div className="h-[400px] md:h-[500px] lg:h-[600px] rounded-xl border border-gray-800 bg-gray-900/50" />}
+          >
+            <TravelMap />
+          </Suspense>
+        </DeferredContent>
       </section>
     </div>
     </PageTransition>

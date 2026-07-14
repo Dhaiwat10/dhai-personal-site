@@ -5,15 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "cache:homepage": "bunx tsx scripts/cache-homepage-data.ts",
     "generate:sitemap": "bunx tsx scripts/generate-sitemap.ts",
-    "build": "bun run generate:sitemap && tsc -b && vite build",
+    "generate:static": "bunx tsx scripts/generate-static-pages.ts",
+    "build": "bun run cache:homepage && bun run generate:sitemap && tsc -b && vite build && bun run generate:static",
     "lint": "eslint .",
     "preview": "vite preview",
     "publish:ipfs": "bun run build && bunx tsx scripts/publish-ipfs.ts",
     "publish:arweave": "bun run build && bunx tsx scripts/publish-arweave.ts"
   },
   "dependencies": {
-    "axios": "^1.12.2",
     "form-data": "^4.0.4",
     "leaflet": "^1.9.4",
     "react": "^19.1.1",

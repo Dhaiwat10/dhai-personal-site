@@ -1,107 +1,49 @@
-import axios from "axios";
-import type { GitHubStats, GitHubUser, GitHubRepo } from "../types/github";
+import type { GitHubStats, LatestRepo } from "../types/github";
+import { staticAssetUrl } from "../utils/static-asset";
 
-const GITHUB_API_BASE = "https://api.github.com";
-const GITHUB_GRAPHQL_API = "https://api.github.com/graphql";
-
-export async function fetchGitHubStats(username: string): Promise<GitHubStats> {
-  try {
-    // Fetch user data for followers
-    const userResponse = await axios.get<GitHubUser>(
-      `${GITHUB_API_BASE}/users/${username}`
-    );
-    const followers = userResponse.data.followers;
-
-    // Fetch all repositories
-    const reposResponse = await axios.get<GitHubRepo[]>(
-      `${GITHUB_API_BASE}/users/${username}/repos?per_page=100&sort=updated`
-    );
-
-    // Calculate total stars from all repos (excluding forks)
-    const totalStars = reposResponse.data
-      .filter((repo) => !repo.fork)
-      .reduce((sum, repo) => sum + repo.stargazers_count, 0);
-
-    // Get latest 3 non-fork repositories
-    const latestRepos = reposResponse.data
-      .filter((repo) => !repo.fork)
-      .sort(
-        (a, b) =>
-          new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime()
-      )
-      .slice(0, 3)
-      .map((repo) => ({
-        name: repo.name,
-        description: repo.description,
-        url: repo.html_url,
-        language: repo.language,
-        updatedAt: repo.pushed_at,
-        stars: repo.stargazers_count,
-      }));
-
-    // Fetch contributions for current year using GraphQL
-    const contributionsThisYear = await fetchContributions(username);
-
-    return {
-      followers,
-      contributionsThisYear,
-      totalStars,
-      latestRepos,
-    };
-  } catch (error) {
-    console.error("Error fetching GitHub stats:", error);
-    throw error;
-  }
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
 
-async function fetchContributions(username: string): Promise<number> {
-  try {
-    const currentYear = new Date().getFullYear();
-    const startDate = `${currentYear}-01-01T00:00:00Z`;
-    const endDate = `${currentYear}-12-31T23:59:59Z`;
-
-    // GraphQL query to get contribution calendar
-    const query = `
-      query($username: String!, $from: DateTime!, $to: DateTime!) {
-        user(login: $username) {
-          contributionsCollection(from: $from, to: $to) {
-            contributionCalendar {
-              totalContributions
-            }
-          }
-        }
-      }
-    `;
-
-    const response = await axios.post(
-      GITHUB_GRAPHQL_API,
-      {
-        query,
-        variables: {
-          username,
-          from: startDate,
-          to: endDate,
-        },
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (
-      response.data.data?.user?.contributionsCollection?.contributionCalendar
-    ) {
-      return response.data.data.user.contributionsCollection
-        .contributionCalendar.totalContributions;
-    }
-
-    // Fallback: If GraphQL fails, return 0
-    return 0;
-  } catch (error) {
-    console.error("Error fetching contributions:", error);
-    // Return 0 if we can't fetch contributions
-    return 0;
+function isLatestRepo(value: unknown): value is LatestRepo {
+  if (!isRecord(value)) {
+    return false;
   }
+
+  return (
+    typeof value.name === "string" &&
+    (typeof value.description === "string" || value.description === null) &&
+    typeof value.url === "string" &&
+    (typeof value.language === "string" || value.language === null) &&
+    typeof value.updatedAt === "string" &&
+    typeof value.stars === "number"
+  );
+}
+
+function isGitHubStats(value: unknown): value is GitHubStats {
+  return (
+    isRecord(value) &&
+    typeof value.followers === "number" &&
+    typeof value.totalStars === "number" &&
+    Array.isArray(value.latestRepos) &&
+    value.latestRepos.every(isLatestRepo)
+  );
+}
+
+export async function fetchGitHubStats(username: string): Promise<GitHubStats> {
+  const cacheUrl = staticAssetUrl(
+    `data/github/${encodeURIComponent(username.toLowerCase())}.json`,
+  );
+  const response = await fetch(cacheUrl, { cache: "force-cache" });
+
+  if (!response.ok) {
+    throw new Error("Unable to load cached GitHub activity.");
+  }
+
+  const data: unknown = await response.json();
+  if (!isGitHubStats(data)) {
+    throw new Error("Cached GitHub activity has an invalid format.");
+  }
+
+  return data;
 }

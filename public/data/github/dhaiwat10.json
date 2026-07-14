@@ -1,0 +1,30 @@
+{
+  "followers": 512,
+  "totalStars": 609,
+  "latestRepos": [
+    {
+      "name": "openboxd",
+      "description": "Open source, self-hostable Letterboxd",
+      "url": "https://github.com/Dhaiwat10/openboxd",
+      "language": "TypeScript",
+      "updatedAt": "2026-07-11T11:51:39Z",
+      "stars": 1
+    },
+    {
+      "name": "letterboxd-power-extension",
+      "description": "Chrome extension that hides Letterboxd ratings for films you haven't watched yet, so you can form your own opinion first.",
+      "url": "https://github.com/Dhaiwat10/letterboxd-power-extension",
+      "language": "JavaScript",
+      "updatedAt": "2026-06-19T23:31:34Z",
+      "stars": 0
+    },
+    {
+      "name": "pdf-reader",
+      "description": "Native macOS PDF reader (SwiftUI + PDFKit). No WebView.",
+      "url": "https://github.com/Dhaiwat10/pdf-reader",
+      "language": "Swift",
+      "updatedAt": "2026-05-01T00:10:49Z",
+      "stars": 0
+    }
+  ]
+}

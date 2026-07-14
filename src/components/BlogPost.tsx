@@ -1,18 +1,22 @@
-import { useParams, Link, Navigate } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import { blogPosts } from '../data/blog-posts';
-import CodeBlock from './CodeBlock';
-import SEO from './SEO';
-import StructuredData from './StructuredData';
-import PageTransition from './PageTransition';
+import { lazy, Suspense } from "react";
+import { Link, Navigate, useParams } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { BLOG_PATH } from "../site";
+import { blogPosts } from "../data/blog-posts";
+import { staticAssetUrl } from "../utils/static-asset";
+import SEO from "./SEO";
+import StructuredData from "./StructuredData";
+import PageTransition from "./PageTransition";
+
+const CodeBlock = lazy(() => import("./CodeBlock"));
 
 function BlogPost() {
   const { id } = useParams<{ id: string }>();
   const post = blogPosts.find((p) => p.id === id);
 
   if (!post) {
-    return <Navigate to="/blog" replace />;
+    return <Navigate to={BLOG_PATH} replace />;
   }
 
   const publishedDate = new Date(post.date).toISOString();
@@ -31,7 +35,7 @@ function BlogPost() {
       <StructuredData type="article" article={post} />
       
       <Link 
-        to="/blog" 
+        to={BLOG_PATH}
         className="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors"
       >
         ← Back to Blog
@@ -58,7 +62,7 @@ function BlogPost() {
           {post.tags.map((tag) => (
             <Link
               key={tag}
-              to={`/blog?tag=${encodeURIComponent(tag)}`}
+              to={`${BLOG_PATH}?tag=${encodeURIComponent(tag)}`}
               className="px-3 py-1 bg-gray-800 text-gray-300 text-sm rounded-md border border-gray-700 hover:bg-gray-700 hover:text-white transition-all"
             >
               {tag}
@@ -72,13 +76,20 @@ function BlogPost() {
           remarkPlugins={[remarkGfm]}
           components={{
             code({ inline, className, children, ...props }: { inline?: boolean; className?: string; children?: React.ReactNode }) {
-              const match = /language-(\w+)/.exec(className || '');
-              const language = match ? match[1] : '';
+              const match = /language-(\w+)/.exec(className || "");
+              const language = match ? match[1] : "";
+              const source = String(children).replace(/\n$/, "");
               
               return !inline && language ? (
-                <CodeBlock language={language}>
-                  {String(children).replace(/\n$/, '')}
-                </CodeBlock>
+                <Suspense
+                  fallback={
+                    <pre className="my-6 overflow-x-auto rounded-lg bg-[#282c34] p-5 text-sm leading-relaxed">
+                      <code>{source}</code>
+                    </pre>
+                  }
+                >
+                  <CodeBlock language={language}>{source}</CodeBlock>
+                </Suspense>
               ) : (
                 <code className="bg-gray-800 text-gray-300 px-1.5 py-0.5 rounded text-sm font-mono border border-gray-700" {...props}>
                   {children}
@@ -158,6 +169,15 @@ function BlogPost() {
                 </a>
               );
             },
+            img: ({ src, alt, loading, decoding, ...props }) => (
+              <img
+                src={src?.startsWith("/") ? staticAssetUrl(src) : src}
+                alt={alt ?? ""}
+                loading={loading ?? "lazy"}
+                decoding={decoding ?? "async"}
+                {...props}
+              />
+            ),
             blockquote: ({ children }) => (
               <blockquote className="border-l-4 border-gray-600 pl-4 italic text-gray-400 my-4">
                 {children}
