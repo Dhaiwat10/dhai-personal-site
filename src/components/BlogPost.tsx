@@ -23,7 +23,7 @@ function BlogPost() {
 
   return (
     <PageTransition>
-      <article className="max-w-4xl mx-auto">
+      <article className="max-w-[68ch] mx-auto">
       <SEO
         title={post.title}
         description={post.excerpt}
@@ -71,7 +71,7 @@ function BlogPost() {
         </div>
       </header>
 
-      <div className="prose prose-lg max-w-none break-words">
+      <div className="prose prose-invert prose-lg max-w-none break-words prose-pre:my-6 prose-pre:bg-transparent prose-pre:p-0 prose-code:before:content-none prose-code:after:content-none prose-img:my-0">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
@@ -96,41 +96,6 @@ function BlogPost() {
                 </code>
               );
             },
-            h1: ({ children }) => (
-              <h1 className="text-3xl font-bold text-white mt-8 mb-4">
-                {children}
-              </h1>
-            ),
-            h2: ({ children }) => (
-              <h2 className="text-2xl font-bold text-white mt-6 mb-3">
-                {children}
-              </h2>
-            ),
-            h3: ({ children }) => (
-              <h3 className="text-xl font-bold text-white mt-4 mb-2">
-                {children}
-              </h3>
-            ),
-            p: ({ children }) => (
-              <p className="text-gray-300 mb-4 leading-relaxed">
-                {children}
-              </p>
-            ),
-            ul: ({ children }) => (
-              <ul className="list-disc list-inside mb-4 space-y-2 text-gray-300">
-                {children}
-              </ul>
-            ),
-            ol: ({ children }) => (
-              <ol className="list-decimal list-inside mb-4 space-y-2 text-gray-300">
-                {children}
-              </ol>
-            ),
-            li: ({ children, id, ...props }) => (
-              <li id={id} className="ml-4" {...props}>
-                {children}
-              </li>
-            ),
             a: ({ href, children }) => {
               // Anchor links (footnotes) - use JS scroll to avoid breaking hash router
               const isAnchor = href?.startsWith('#');
@@ -169,19 +134,22 @@ function BlogPost() {
                 </a>
               );
             },
-            img: ({ src, alt, loading, decoding, ...props }) => (
-              <img
-                src={src?.startsWith("/") ? staticAssetUrl(src) : src}
-                alt={alt ?? ""}
-                loading={loading ?? "lazy"}
-                decoding={decoding ?? "async"}
-                {...props}
-              />
-            ),
-            blockquote: ({ children }) => (
-              <blockquote className="border-l-4 border-gray-600 pl-4 italic text-gray-400 my-4">
-                {children}
-              </blockquote>
+            img: ({ src, alt, title, loading, decoding, ...props }) => (
+              <span className="block my-8">
+                <img
+                  src={src?.startsWith("/") ? staticAssetUrl(src) : src}
+                  alt={alt ?? ""}
+                  loading={loading ?? "lazy"}
+                  decoding={decoding ?? "async"}
+                  className="mx-auto rounded-lg border border-gray-800"
+                  {...props}
+                />
+                {title ? (
+                  <span className="mt-3 block text-center text-sm text-gray-500">
+                    {title}
+                  </span>
+                ) : null}
+              </span>
             ),
             // Footnote reference (the superscript number in the text)
             sup: ({ children, id, ...props }) => (
