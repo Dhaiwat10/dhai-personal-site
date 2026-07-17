@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
+@plugin "@tailwindcss/typography";
 
 /* Global page background to avoid white iOS bounce area */
 html {
