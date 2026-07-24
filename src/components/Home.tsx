@@ -27,17 +27,18 @@ function Home() {
   return (
     <PageTransition>
       <div>
-      <section className="mb-16">
-        <h1 className="text-5xl font-bold text-white mb-4">dhai.eth</h1>
-        <h2 className="text-3xl text-gray-300 mb-6">Dhaiwat Pandya</h2>
-        <p className="text-xl text-gray-400 max-w-2xl">
+      <section className="mb-24 pt-6 sm:mb-32 sm:pt-12">
+        <h1 className="max-w-4xl text-balance text-5xl font-semibold text-white sm:text-7xl">
+          Dhaiwat Pandya
+        </h1>
+        <p className="mt-5 max-w-2xl text-pretty text-lg leading-8 text-zinc-400 sm:text-xl">
           Chasing my curiosities. Spiraling upwards.
         </p>
 
-        <div className="flex flex-row gap-4 mt-4">
+        <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm">
           <a
             href="https://x.com/dhaiwat10"
-            className="text-gray-400 hover:text-white font-medium transition-colors underline"
+            className="font-medium text-zinc-500 transition-colors hover:text-white"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -45,7 +46,7 @@ function Home() {
           </a>
           <a
             href="https://github.com/dhaiwat10"
-            className="text-gray-400 hover:text-white font-medium transition-colors underline"
+            className="font-medium text-zinc-500 transition-colors hover:text-white"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -53,15 +54,15 @@ function Home() {
           </a>
           <a
             href="https://hackmd.io/@dhaiwat10/ByA1tWTgee"
-            className="text-gray-400 hover:text-white font-medium transition-colors underline"
+            className="font-medium text-zinc-500 transition-colors hover:text-white"
             target="_blank"
             rel="noopener noreferrer"
           >
             CV
           </a>
           <a
-            href="https://farcaster.xyz/dhai.eth"
-            className="text-gray-400 hover:text-white font-medium transition-colors underline"
+            href="https://farcaster.xyz/~/profiles/3339"
+            className="font-medium text-zinc-500 transition-colors hover:text-white"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -71,30 +72,29 @@ function Home() {
       </section>
 
       <section>
-        <div className="flex justify-between items-center mb-6">
-          <h3 className="text-2xl font-bold text-white">Latest Posts</h3>
+        <div className="mb-7 flex items-end justify-between gap-4 border-b border-white/10 pb-4">
+          <h2 className="text-balance text-2xl font-semibold text-white">Latest posts</h2>
           <Link
             to={BLOG_PATH}
-            className="text-gray-400 hover:text-white font-medium transition-colors"
+            className="shrink-0 text-sm font-medium text-zinc-500 transition-colors hover:text-white"
           >
-            View all →
+            View all <span aria-hidden="true">↗</span>
           </Link>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {latestPosts.map((post, index) => (
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {latestPosts.map((post) => (
             <article
               key={post.id}
-              style={{ animationDelay: `${index * 0.1}s` }}
-              className="animate-slide-up rounded-lg border border-gray-800 p-6 hover:border-gray-700 transition-all bg-gray-900/50"
+              className="rounded-xl border border-white/10 bg-white/[0.025] p-6 transition-colors hover:border-white/20 hover:bg-white/[0.04]"
             >
               <Link to={articlePath(post.id)}>
-                <h4 className="text-xl font-bold text-white mb-2 hover:text-gray-300 transition-colors">
+                <h3 className="text-balance text-lg font-semibold leading-snug text-white transition-colors hover:text-zinc-300">
                   {post.title}
-                </h4>
+                </h3>
               </Link>
 
-              <time dateTime={post.date} className="text-sm text-gray-500">
+              <time dateTime={post.date} className="mt-3 block text-xs tabular-nums text-zinc-500">
                 {new Date(post.date).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
@@ -102,117 +102,117 @@ function Home() {
                 })} • {post.readingTime} min read
               </time>
 
-              <p className="text-gray-400 mt-3 mb-4 line-clamp-3">
+              <p className="mt-4 mb-6 line-clamp-3 text-pretty text-sm leading-6 text-zinc-400">
                 {post.excerpt}
               </p>
 
               <Link
                 to={articlePath(post.id)}
-                className="text-gray-400 hover:text-white font-medium text-sm transition-colors inline-flex items-center"
+                className="inline-flex items-center text-sm font-medium text-zinc-300 transition-colors hover:text-white"
               >
-                Read more →
+                Read article <span className="ml-1" aria-hidden="true">→</span>
               </Link>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="mt-16">
-        <div className="mb-6">
-          <div className="flex justify-between items-center mb-3">
-            <h3 className="text-2xl font-bold text-white">GitHub Activity</h3>
+      <section className="mt-24 sm:mt-32">
+        <div className="mb-7">
+          <div className="mb-3 flex items-end justify-between gap-4 border-b border-white/10 pb-4">
+            <h2 className="text-balance text-2xl font-semibold text-white">GitHub activity</h2>
             <a
               href="https://github.com/dhaiwat10"
-              className="text-gray-400 hover:text-white font-medium transition-colors"
+              className="shrink-0 text-sm font-medium text-zinc-500 transition-colors hover:text-white"
               target="_blank"
               rel="noopener noreferrer"
             >
-              View profile →
+              View profile <span aria-hidden="true">↗</span>
             </a>
           </div>
-          <p className="text-gray-400 max-w-2xl">
-            I am always experimenting with problems I find interesting. I post a lot of these experiments on my GitHub.
+          <p className="max-w-2xl text-pretty leading-7 text-zinc-400">
+            I am always experimenting with problems I find interesting. I post a lot of these experiments on GitHub.
           </p>
         </div>
 
         <DeferredContent
           rootMargin="240px"
-          fallback={<div className="h-48 rounded-lg border border-gray-800 bg-gray-900/50 animate-pulse" />}
+          fallback={<div className="h-48 animate-pulse rounded-xl border border-white/10 bg-white/[0.025]" />}
         >
           <Suspense
-            fallback={<div className="h-48 rounded-lg border border-gray-800 bg-gray-900/50 animate-pulse" />}
+            fallback={<div className="h-48 animate-pulse rounded-xl border border-white/10 bg-white/[0.025]" />}
           >
             <GitHubStats username="dhaiwat10" />
           </Suspense>
         </DeferredContent>
       </section>
 
-      <section className="mt-16">
-        <div className="mb-6">
-          <div className="flex justify-between items-center mb-3">
-            <h3 className="text-2xl font-bold text-white">Motorsports</h3>
+      <section className="mt-24 sm:mt-32">
+        <div className="mb-7">
+          <div className="mb-3 border-b border-white/10 pb-4">
+            <h2 className="text-balance text-2xl font-semibold text-white">Motorsports</h2>
           </div>
-          <p className="text-gray-400 max-w-2xl mb-4">
+          <p className="max-w-2xl text-pretty leading-7 text-zinc-400">
             Racetracks and racecars. There's nowhere I feel more free.
           </p>
         </div>
 
         <DeferredContent
           rootMargin="160px"
-          fallback={<div className="aspect-video rounded-xl border border-gray-800 bg-gray-900/50" />}
+          fallback={<div className="aspect-video rounded-xl border border-white/10 bg-white/[0.025]" />}
         >
           <Suspense
-            fallback={<div className="aspect-video rounded-xl border border-gray-800 bg-gray-900/50" />}
+            fallback={<div className="aspect-video rounded-xl border border-white/10 bg-white/[0.025]" />}
           >
             <MotorsportsVideo />
           </Suspense>
         </DeferredContent>
       </section>
 
-      <section className="mt-16">
-        <div className="mb-6">
-          <div className="flex justify-between items-center mb-3">
-            <h3 className="text-2xl font-bold text-white">Recent Films</h3>
+      <section className="mt-24 sm:mt-32">
+        <div className="mb-7">
+          <div className="mb-3 flex items-end justify-between gap-4 border-b border-white/10 pb-4">
+            <h2 className="text-balance text-2xl font-semibold text-white">Recent films</h2>
             <a
               href="https://letterboxd.com/dhaiwat10"
-              className="text-gray-400 hover:text-white font-medium transition-colors"
+              className="shrink-0 text-sm font-medium text-zinc-500 transition-colors hover:text-white"
               target="_blank"
               rel="noopener noreferrer"
             >
-              View all →
+              View all <span aria-hidden="true">↗</span>
             </a>
           </div>
-          <p className="text-gray-400 max-w-2xl">
-            Movies are my favourite art form. Here are a few that I watched the most recently from my Letterboxd profile.
+          <p className="max-w-2xl text-pretty leading-7 text-zinc-400">
+            Movies are my favourite art form. Here are a few that I watched most recently on Letterboxd.
           </p>
         </div>
 
         <DeferredContent
           rootMargin="240px"
-          fallback={<div className="h-72 rounded-lg border border-gray-800 bg-gray-900/50 animate-pulse" />}
+          fallback={<div className="h-72 animate-pulse rounded-xl border border-white/10 bg-white/[0.025]" />}
         >
           <Suspense
-            fallback={<div className="h-72 rounded-lg border border-gray-800 bg-gray-900/50 animate-pulse" />}
+            fallback={<div className="h-72 animate-pulse rounded-xl border border-white/10 bg-white/[0.025]" />}
           >
             <LetterboxdRecent username="Dhaiwat" limit={6} />
           </Suspense>
         </DeferredContent>
       </section>
 
-      <section id="travels" className="mt-16">
-        <div className="mb-6">
-          <h3 className="text-2xl font-bold text-white mb-3">Travels</h3>
-          <p className="text-gray-400 max-w-2xl">
+      <section id="travels" className="mt-24 sm:mt-32">
+        <div className="mb-7">
+          <h2 className="mb-3 border-b border-white/10 pb-4 text-balance text-2xl font-semibold text-white">Travels</h2>
+          <p className="max-w-2xl text-pretty leading-7 text-zinc-400">
             Ever since I was a kid, I was fascinated with maps and travel. These are some of the places I've been fortunate enough to visit.
           </p>
         </div>
 
         <DeferredContent
           rootMargin="160px"
-          fallback={<div className="h-[400px] md:h-[500px] lg:h-[600px] rounded-xl border border-gray-800 bg-gray-900/50" />}
+          fallback={<div className="h-[400px] rounded-xl border border-white/10 bg-white/[0.025] md:h-[500px] lg:h-[600px]" />}
         >
           <Suspense
-            fallback={<div className="h-[400px] md:h-[500px] lg:h-[600px] rounded-xl border border-gray-800 bg-gray-900/50" />}
+            fallback={<div className="h-[400px] rounded-xl border border-white/10 bg-white/[0.025] md:h-[500px] lg:h-[600px]" />}
           >
             <TravelMap />
           </Suspense>
