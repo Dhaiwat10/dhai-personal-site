@@ -89,7 +89,7 @@ function Home() {
               className="rounded-xl border border-white/10 bg-white/[0.025] p-6 transition-colors hover:border-white/20 hover:bg-white/[0.04]"
             >
               <Link to={articlePath(post.id)}>
-                <h3 className="text-balance text-lg font-semibold leading-snug text-white transition-colors hover:text-zinc-300">
+                <h3 className="font-blog text-balance text-lg font-semibold leading-snug text-white transition-colors hover:text-zinc-300">
                   {post.title}
                 </h3>
               </Link>
@@ -102,7 +102,7 @@ function Home() {
                 })} • {post.readingTime} min read
               </time>
 
-              <p className="mt-4 mb-6 line-clamp-3 text-pretty text-sm leading-6 text-zinc-400">
+              <p className="font-blog mt-4 mb-6 line-clamp-3 text-pretty text-sm leading-6 text-zinc-400">
                 {post.excerpt}
               </p>
 
@@ -209,10 +209,10 @@ function Home() {
 
         <DeferredContent
           rootMargin="160px"
-          fallback={<div className="h-[400px] rounded-xl border border-white/10 bg-white/[0.025] md:h-[500px] lg:h-[600px]" />}
+          fallback={<div className="h-[360px] rounded-xl border border-white/10 bg-white/[0.025] sm:h-[440px] lg:h-[520px]" />}
         >
           <Suspense
-            fallback={<div className="h-[400px] rounded-xl border border-white/10 bg-white/[0.025] md:h-[500px] lg:h-[600px]" />}
+            fallback={<div className="h-[360px] rounded-xl border border-white/10 bg-white/[0.025] sm:h-[440px] lg:h-[520px]" />}
           >
             <TravelMap />
           </Suspense>

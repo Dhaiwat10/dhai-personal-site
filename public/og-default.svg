@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
-  <title id="title">dhai.eth</title>
+  <title id="title">Dhaiwat Pandya</title>
   <desc id="description">Dhaiwat Pandya, Ethereum Developer</desc>
   <defs>
     <linearGradient id="surface" x1="0" y1="0" x2="1" y2="1">
@@ -16,7 +16,7 @@
   <path d="M0 505C160 435 269 565 443 475s254 36 379-59 205-57 378-125" fill="none" stroke="#60a5fa" stroke-opacity=".3" stroke-width="2"/>
   <circle cx="876" cy="416" r="8" fill="#60a5fa"/>
   <circle cx="443" cy="475" r="6" fill="#93c5fd"/>
-  <text x="96" y="262" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="100" font-weight="700" letter-spacing="-4">dhai.eth</text>
-  <text x="102" y="338" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="500">Dhaiwat Pandya · Ethereum Developer</text>
+  <text x="96" y="262" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="100" font-weight="700" letter-spacing="-4">Dhaiwat Pandya</text>
+  <text x="102" y="338" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="500">Ethereum Developer</text>
   <text x="102" y="482" fill="#94a3b8" font-family="Inter, Arial, sans-serif" font-size="25">Relentlessly curious.</text>
 </svg>

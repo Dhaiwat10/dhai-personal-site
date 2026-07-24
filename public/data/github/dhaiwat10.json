@@ -1,29 +1,29 @@
 {
-  "followers": 512,
-  "totalStars": 609,
+  "followers": 511,
+  "totalStars": 603,
   "latestRepos": [
     {
-      "name": "openboxd",
-      "description": "Open source, self-hostable Letterboxd",
-      "url": "https://github.com/Dhaiwat10/openboxd",
+      "name": "dhai-personal-site",
+      "description": "My personal website deployed to IPFS, connected to my ENS",
+      "url": "https://github.com/Dhaiwat10/dhai-personal-site",
       "language": "TypeScript",
-      "updatedAt": "2026-07-11T11:51:39Z",
-      "stars": 1
+      "updatedAt": "2026-07-24T15:51:47Z",
+      "stars": 6
     },
     {
-      "name": "letterboxd-power-extension",
-      "description": "Chrome extension that hides Letterboxd ratings for films you haven't watched yet, so you can form your own opinion first.",
-      "url": "https://github.com/Dhaiwat10/letterboxd-power-extension",
-      "language": "JavaScript",
-      "updatedAt": "2026-06-19T23:31:34Z",
+      "name": "raycast-mouse-cursor-toggle",
+      "description": "A Raycast extension for hiding and showing the macOS mouse cursor.",
+      "url": "https://github.com/Dhaiwat10/raycast-mouse-cursor-toggle",
+      "language": "TypeScript",
+      "updatedAt": "2026-07-21T11:52:08Z",
       "stars": 0
     },
     {
-      "name": "pdf-reader",
-      "description": "Native macOS PDF reader (SwiftUI + PDFKit). No WebView.",
-      "url": "https://github.com/Dhaiwat10/pdf-reader",
-      "language": "Swift",
-      "updatedAt": "2026-05-01T00:10:49Z",
+      "name": "private-watch-party",
+      "description": "Self-hosted, sub-second 4K live streaming to friends over a private Tailscale network — a private alternative to Discord's 720p screen-share cap.",
+      "url": "https://github.com/Dhaiwat10/private-watch-party",
+      "language": "Shell",
+      "updatedAt": "2026-07-21T10:55:26Z",
       "stars": 0
     }
   ]

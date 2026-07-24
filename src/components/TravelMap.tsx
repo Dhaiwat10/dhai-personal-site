@@ -2,13 +2,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import L from "leaflet";
 import { travelLocations } from "../data/travel-locations";
 
-const defaultIcon = new L.Icon({
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
+const markerIcon = L.divIcon({
+  className: "travel-map-marker",
+  iconSize: [14, 14],
+  iconAnchor: [7, 7],
+  popupAnchor: [0, -10],
 });
 
 function TravelMap() {
@@ -60,41 +58,57 @@ function TravelMap() {
     const map = L.map(mapContainerRef.current, {
       center,
       zoom,
-      scrollWheelZoom: true,
+      scrollWheelZoom: false,
     });
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
+    L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+      {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        maxZoom: 20,
+      },
+    ).addTo(map);
 
     const markersLayer = L.layerGroup().addTo(map);
     markersLayerRef.current = markersLayer;
 
     travelLocations.forEach((location) => {
       L.marker([location.latitude, location.longitude], {
-        icon: defaultIcon,
+        icon: markerIcon,
+        alt: `${location.city}, ${location.country}`,
+        title: `${location.city}, ${location.country}`,
       })
         .addTo(markersLayer)
         .bindPopup(
           `
-            <div class="text-gray-900">
-              <div class="font-bold text-lg">${location.city}</div>
-              <div class="text-sm text-gray-600">${location.country}</div>
+            <div class="text-zinc-100">
+              <div class="text-base font-semibold">${location.city}</div>
+              <div class="mt-0.5 text-sm text-zinc-400">${location.country}</div>
               ${
                 location.year
-                  ? `<div class="text-xs text-gray-500 mt-1">${location.year}</div>`
+                  ? `<div class="mt-2 text-xs tabular-nums text-zinc-500">${location.year}</div>`
                   : ""
               }
               ${
                 location.notes
-                  ? `<div class="text-sm text-gray-700 mt-1">${location.notes}</div>`
+                  ? `<div class="mt-2 text-pretty text-sm leading-5 text-zinc-300">${location.notes}</div>`
                   : ""
               }
             </div>
           `
         );
     });
+
+    map.fitBounds(
+      L.latLngBounds(
+        travelLocations.map((location) => [
+          location.latitude,
+          location.longitude,
+        ]),
+      ),
+      { maxZoom: 4, padding: [24, 24] },
+    );
 
     mapInstanceRef.current = map;
 
@@ -107,25 +121,28 @@ function TravelMap() {
 
   if (travelLocations.length === 0) {
     return (
-      <div className="rounded-xl border border-gray-800 bg-gray-900/50 p-8 text-center text-gray-400">
-        No travel locations added yet.
+      <div className="rounded-xl border border-white/10 bg-white/[0.025] p-8 text-center text-sm text-zinc-500">
+        No travel locations yet.
       </div>
     );
   }
 
   if (!isMounted) {
     return (
-      <div className="rounded-xl border border-gray-800 bg-gray-900/50 h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
-        <div className="text-gray-400">Loading map...</div>
-      </div>
+      <div
+        aria-label="Loading travel map"
+        className="h-[360px] animate-pulse rounded-xl border border-white/10 bg-white/[0.025] sm:h-[440px] lg:h-[520px]"
+      />
     );
   }
 
   return (
-    <div className="rounded-xl border border-gray-800 overflow-hidden bg-gray-900/50">
+    <div className="travel-map overflow-hidden rounded-xl border border-white/10 bg-white/[0.025]">
       <div
         ref={mapContainerRef}
-        className="h-[400px] md:h-[500px] lg:h-[600px] w-full z-0"
+        role="region"
+        aria-label="Map of places Dhaiwat has visited"
+        className="z-0 h-[360px] w-full sm:h-[440px] lg:h-[520px]"
       />
     </div>
   );

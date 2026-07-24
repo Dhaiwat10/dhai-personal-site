@@ -60,7 +60,7 @@ function buildStructuredData(page: StaticPage): Record<string, unknown> {
       sameAs: [
         "https://x.com/dhaiwat10",
         "https://github.com/dhaiwat10",
-        "https://farcaster.xyz/dhai.eth",
+        "https://farcaster.xyz/~/profiles/3339",
       ],
       jobTitle: "Ethereum Developer",
       description: DEFAULT_DESCRIPTION,
@@ -71,7 +71,7 @@ function buildStructuredData(page: StaticPage): Record<string, unknown> {
     return {
       "@context": "https://schema.org",
       "@type": "Blog",
-      name: "dhai.eth Blog",
+      name: "Dhaiwat Pandya Blog",
       url: canonicalUrl(BLOG_PATH),
       description: page.description,
       author: {

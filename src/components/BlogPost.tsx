@@ -42,12 +42,12 @@ function BlogPost() {
       </Link>
       
       <header className="mb-12">
-        <h1 className="text-4xl font-bold text-white mb-4">
+        <h1 className="font-blog text-4xl font-bold text-white mb-4">
           {post.title}
         </h1>
         
         {post.excerpt && (
-          <p className="text-lg text-gray-400 mb-4">{post.excerpt}</p>
+          <p className="font-blog text-lg text-gray-400 mb-4">{post.excerpt}</p>
         )}
         
         <time dateTime={publishedDate} className="text-gray-500">
@@ -71,7 +71,7 @@ function BlogPost() {
         </div>
       </header>
 
-      <div className="prose prose-invert prose-lg max-w-none break-words prose-pre:my-6 prose-pre:bg-transparent prose-pre:p-0 prose-code:before:content-none prose-code:after:content-none prose-img:my-0">
+      <div className="font-blog prose prose-invert prose-lg max-w-none break-words prose-pre:my-6 prose-pre:bg-transparent prose-pre:p-0 prose-code:before:content-none prose-code:after:content-none prose-img:my-0">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{

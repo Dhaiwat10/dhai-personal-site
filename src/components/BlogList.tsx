@@ -47,134 +47,170 @@ function BlogList() {
 
   return (
     <PageTransition>
-      <div className="max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold text-white mb-8">Blog</h1>
-      
-      {/* Search and Filter Controls */}
-      <div className="mb-8 space-y-6">
-        {/* Search Input */}
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Search posts..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 transition-all"
-          />
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+      <div className="mx-auto max-w-5xl">
+        <header className="mb-10 border-b border-white/10 pb-8 sm:mb-12">
+          <h1 className="text-balance text-4xl font-semibold text-white sm:text-5xl">
+            Blog
+          </h1>
+        </header>
+
+        <div className="mb-10 space-y-5">
+          <div className="relative max-w-2xl">
+            <label htmlFor="blog-search" className="sr-only">
+              Search posts
+            </label>
+            <input
+              id="blog-search"
+              type="search"
+              placeholder="Search posts…"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              className="w-full rounded-xl border border-white/10 bg-white/[0.025] px-4 py-3 pr-11 text-sm text-white placeholder:text-zinc-600 transition-colors focus:border-zinc-600 focus:outline-none focus:ring-2 focus:ring-zinc-800"
+            />
+            <svg
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="pointer-events-none absolute right-4 top-1/2 size-5 -translate-y-1/2 text-zinc-600"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              />
             </svg>
           </div>
-        </div>
 
-        {/* Tag Browser */}
-        <div>
-          <div className="flex flex-wrap gap-2 mb-2">
+          <nav aria-label="Filter posts by tag" className="flex flex-wrap gap-2">
             {allTags.map((tag) => (
               <Link
                 key={tag}
                 to={`${BLOG_PATH}?tag=${encodeURIComponent(tag)}`}
-                className={`px-3 py-1 text-sm rounded-md border transition-all ${
+                className={`rounded-md border px-3 py-1.5 text-xs font-medium transition-colors ${
                   selectedTag === tag
-                    ? 'bg-gray-600 text-white border-gray-500'
-                    : 'bg-gray-700 text-gray-300 border-gray-600 hover:bg-gray-600 hover:text-white'
+                    ? "border-zinc-500 bg-zinc-800 text-white"
+                    : "border-white/10 bg-white/[0.025] text-zinc-500 hover:border-white/20 hover:bg-white/[0.04] hover:text-zinc-200"
                 }`}
               >
                 {tag}
               </Link>
             ))}
-          </div>
-          
+          </nav>
+
           {(selectedTag || searchQuery) && (
-            <div className="flex items-center gap-2 mt-3">
-              <span className="text-gray-400 text-sm">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-zinc-500">
+              <span className="text-pretty">
                 {selectedTag && searchQuery ? (
-                  <>Filtering by tag <span className="text-white font-medium">{selectedTag}</span> and search <span className="text-white font-medium">"{searchQuery}"</span></>
+                  <>
+                    Filtering by <span className="font-medium text-zinc-200">{selectedTag}</span> and searching for{" "}
+                    <span className="font-medium text-zinc-200">“{searchQuery}”</span>
+                  </>
                 ) : selectedTag ? (
-                  <>Filtering by tag <span className="text-white font-medium">{selectedTag}</span></>
+                  <>
+                    Filtering by <span className="font-medium text-zinc-200">{selectedTag}</span>
+                  </>
                 ) : (
-                  <>Searching for <span className="text-white font-medium">"{searchQuery}"</span></>
+                  <>
+                    Searching for <span className="font-medium text-zinc-200">“{searchQuery}”</span>
+                  </>
                 )}
               </span>
               <button
+                type="button"
                 onClick={clearFilter}
-                className="text-gray-400 hover:text-white text-sm underline transition-colors"
+                className="font-medium text-zinc-300 underline decoration-zinc-700 underline-offset-4 transition-colors hover:text-white"
               >
-                Clear all
+                Clear filters
               </button>
             </div>
           )}
         </div>
-      </div>
 
-      {/* Blog Posts */}
-      <div className="space-y-6">
-        {filteredPosts.length === 0 ? (
-          <div className="text-center py-12 border border-gray-800 rounded-lg bg-gray-900/30">
-            <p className="text-gray-400 text-lg mb-2">No posts found</p>
-            <p className="text-gray-500 text-sm">Try adjusting your search or filters</p>
-            <button
-              onClick={clearFilter}
-              className="text-gray-400 hover:text-white underline mt-4 transition-colors"
-            >
-              Clear all filters
-            </button>
-          </div>
-        ) : (
-          filteredPosts.map((post, index) => (
-            <article
-              key={post.id}
-              style={{ animationDelay: `${index * 0.05}s` }}
-              itemScope
-              itemType="https://schema.org/BlogPosting"
-              className="animate-slide-up rounded-lg border border-gray-800 p-6 hover:border-gray-700 transition-all bg-gray-900/50"
-            >
-              <Link to={articlePath(post.id)}>
-                <h2 itemProp="headline" className="text-2xl font-bold text-white mb-2 hover:text-gray-300 transition-colors">
-                  {post.title}
-                </h2>
-              </Link>
-              
-              <time dateTime={post.date} className="text-sm text-gray-500">
-                {new Date(post.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })} • {post.readingTime} min read
-              </time>
-              
-              <p itemProp="description" className="text-gray-400 mt-3 mb-4">
-                {post.excerpt}
+        <div className="border-t border-white/10">
+          {filteredPosts.length === 0 ? (
+            <div className="border-b border-white/10 py-16 text-center">
+              <h2 className="text-balance text-xl font-semibold text-white">
+                No posts found
+              </h2>
+              <p className="mt-2 text-pretty text-sm text-zinc-500">
+                Try another search or clear the current filters.
               </p>
-              
-              <div className="flex flex-wrap gap-2 mb-4">
-                {post.tags.map((tag) => (
-                  <Link
-                    key={tag}
-                    to={`${BLOG_PATH}?tag=${encodeURIComponent(tag)}`}
-                    className={`px-3 py-1 text-sm rounded-md border transition-all ${
-                      selectedTag === tag
-                        ? 'bg-gray-600 text-white border-gray-500'
-                        : 'bg-gray-700 text-gray-300 border-gray-600 hover:bg-gray-600 hover:text-white'
-                    }`}
-                  >
-                    {tag}
-                  </Link>
-                ))}
-              </div>
-              
-              <Link 
-                to={articlePath(post.id)}
-                className="text-gray-400 hover:text-white font-medium transition-colors inline-flex items-center"
+              <button
+                type="button"
+                onClick={clearFilter}
+                className="mt-6 text-sm font-medium text-zinc-300 underline decoration-zinc-700 underline-offset-4 transition-colors hover:text-white"
               >
-                Read more →
-              </Link>
-            </article>
-          ))
-        )}
+                Clear filters
+              </button>
+            </div>
+          ) : (
+            filteredPosts.map((post) => (
+              <article
+                key={post.id}
+                itemScope
+                itemType="https://schema.org/BlogPosting"
+                className="border-b border-white/10 py-8 sm:py-10"
+              >
+                <time
+                  dateTime={post.date}
+                  className="block text-xs tabular-nums text-zinc-500"
+                >
+                  {new Date(post.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}{" "}
+                  • {post.readingTime} min read
+                </time>
+
+                <Link to={articlePath(post.id)} className="group mt-3 inline-block">
+                  <h2
+                    itemProp="headline"
+                    className="font-blog max-w-3xl text-balance text-2xl font-semibold leading-tight text-white transition-colors group-hover:text-zinc-300 sm:text-3xl"
+                  >
+                    {post.title}
+                  </h2>
+                </Link>
+
+                <p
+                  itemProp="description"
+                  className="font-blog mt-4 max-w-3xl text-pretty text-base leading-7 text-zinc-400"
+                >
+                  {post.excerpt}
+                </p>
+
+                <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex flex-wrap gap-2">
+                    {post.tags.map((tag) => (
+                      <Link
+                        key={tag}
+                        to={`${BLOG_PATH}?tag=${encodeURIComponent(tag)}`}
+                        className={`rounded-md border px-2.5 py-1 text-xs font-medium transition-colors ${
+                          selectedTag === tag
+                            ? "border-zinc-500 bg-zinc-800 text-white"
+                            : "border-white/10 bg-white/[0.025] text-zinc-500 hover:border-white/20 hover:text-zinc-200"
+                        }`}
+                      >
+                        {tag}
+                      </Link>
+                    ))}
+                  </div>
+
+                  <Link
+                    to={articlePath(post.id)}
+                    className="inline-flex items-center text-sm font-medium text-zinc-300 transition-colors hover:text-white"
+                  >
+                    Read article <span className="ml-1" aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              </article>
+            ))
+          )}
+        </div>
       </div>
-    </div>
     </PageTransition>
   );
 }

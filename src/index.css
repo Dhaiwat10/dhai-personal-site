@@ -18,6 +18,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.font-blog {
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+}
+
 #root {
   min-height: 100vh;
 }
@@ -118,6 +122,70 @@ sup a::after {
 
 sup a:hover {
   color: #d1d5db;
+}
+
+/* Keep Leaflet's controls and popups inside the site's dark visual system. */
+.travel-map .leaflet-container {
+  background: var(--color-zinc-950);
+}
+
+.travel-map-marker {
+  border: 2px solid var(--color-zinc-950);
+  border-radius: 9999px;
+  background: var(--color-zinc-100);
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.35);
+}
+
+.travel-map-marker:focus-visible {
+  outline: 2px solid var(--color-zinc-100);
+  outline-offset: 3px;
+}
+
+.travel-map .leaflet-bar {
+  border: 1px solid rgb(255 255 255 / 0.1);
+  box-shadow: none;
+}
+
+.travel-map .leaflet-bar a,
+.travel-map .leaflet-bar a:focus {
+  border-bottom-color: rgb(255 255 255 / 0.1);
+  background: var(--color-zinc-900);
+  color: var(--color-zinc-300);
+}
+
+.travel-map .leaflet-bar a:hover {
+  background: var(--color-zinc-800);
+  color: var(--color-white);
+}
+
+.travel-map .leaflet-popup-content-wrapper,
+.travel-map .leaflet-popup-tip {
+  background: var(--color-zinc-900);
+  color: var(--color-zinc-100);
+}
+
+.travel-map .leaflet-popup-content-wrapper {
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.travel-map .leaflet-popup-content {
+  min-width: 10rem;
+  margin: 1rem;
+}
+
+.travel-map .leaflet-popup-close-button {
+  color: var(--color-zinc-500);
+}
+
+.travel-map .leaflet-control-attribution {
+  background: rgb(9 9 11 / 0.8);
+  color: var(--color-zinc-600);
+}
+
+.travel-map .leaflet-control-attribution a {
+  color: var(--color-zinc-400);
 }
 
 /* Respect user's motion preferences */

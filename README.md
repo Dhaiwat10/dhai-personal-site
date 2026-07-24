@@ -1,10 +1,10 @@
-# dhai.eth
+# Dhaiwat Pandya
 
 A modern React + Vite + Tailwind CSS site automatically published to IPFS and IPNS, and attached to my ENS.
 
 ## 🌐 Live Site
 
-- **IPNS**: [https://dhai.eth.limo](https://dhai.eth.limo)
+- **Website**: [https://dhaiwat.xyz](https://dhaiwat.xyz)
 - **Latest IPFS Gateway**: Check `latest-ipfs.txt` after each deploy
 
 ## 🚀 Features

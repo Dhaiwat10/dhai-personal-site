@@ -1,7 +1,7 @@
-export const SITE_URL = "https://dhai.eth.limo";
-export const SITE_NAME = "dhai.eth";
+export const SITE_URL = "https://dhaiwat.xyz";
+export const SITE_NAME = "Dhaiwat Pandya";
 export const DEFAULT_DESCRIPTION = "Ethereum Developer. Relentlessly Curious.";
-export const DEFAULT_TITLE = "dhai.eth | Dhaiwat Pandya";
+export const DEFAULT_TITLE = "Dhaiwat Pandya";
 export const SITE_IMAGE = `${SITE_URL}/og-default.png`;
 export const BLOG_PATH = "/blog/";
 

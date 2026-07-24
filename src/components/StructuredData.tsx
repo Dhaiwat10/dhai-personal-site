@@ -24,7 +24,7 @@ function StructuredData({ type, article }: StructuredDataProps) {
         sameAs: [
           "https://x.com/dhaiwat10",
           "https://github.com/dhaiwat10",
-          "https://farcaster.xyz/dhai.eth",
+          "https://farcaster.xyz/~/profiles/3339",
         ],
         jobTitle: "Ethereum Developer",
         description: "Ethereum Developer. Relentlessly Curious.",
@@ -33,7 +33,7 @@ function StructuredData({ type, article }: StructuredDataProps) {
       jsonLd = {
         "@context": "https://schema.org",
         "@type": "Blog",
-        name: "dhai.eth Blog",
+        name: "Dhaiwat Pandya Blog",
         url: canonicalUrl(BLOG_PATH),
         description:
           "Blog posts by Dhaiwat Pandya about Ethereum development and other topics.",
