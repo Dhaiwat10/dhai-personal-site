@@ -23,6 +23,19 @@ A modern React + Vite + Tailwind CSS site automatically published to IPFS and IP
 
 The guide covers everything from creating the project to ENS configuration.
 
+## 🤖 WebMCP site tools
+
+The site exposes three read-only tools to WebMCP-compatible agents: search the
+blog, read a published post, and list travel-map locations. Their definitions
+live in [`src/site-tools.ts`](./src/site-tools.ts).
+
+WebMCP requires an origin-isolated document. Local development, the bundled
+Nginx configuration, and Vercel (via [`vercel.json`](./vercel.json)) send the
+required `Cross-Origin-Opener-Policy: same-origin` and
+`Cross-Origin-Embedder-Policy: credentialless` headers. If the static files are
+served through a raw IPFS gateway instead, configure the custom domain or
+gateway in front of the IPFS site to send those headers too.
+
 ## 📦 Development
 
 ### Prerequisites
