@@ -174,7 +174,7 @@ function Home() {
           <div className="mb-3 flex items-end justify-between gap-4 border-b border-white/10 pb-4">
             <h2 className="text-balance text-2xl font-semibold text-white">Recent films</h2>
             <a
-              href="https://letterboxd.com/dhaiwat10"
+              href="https://letterboxd.com/dhaiwat/"
               className="shrink-0 text-sm font-medium text-zinc-500 transition-colors hover:text-white"
               target="_blank"
               rel="noopener noreferrer"

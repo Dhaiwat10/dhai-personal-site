@@ -1,5 +1,11 @@
 import type { LetterboxdFeed, LetterboxdMovie } from "../types/letterboxd";
 import { staticAssetUrl } from "../utils/static-asset";
+import {
+  deduplicateLetterboxdMovies,
+  parseLetterboxdMovies,
+} from "./letterboxd-feed";
+
+const RSS2JSON_API_URL = "https://api.rss2json.com/v1/api.json";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
@@ -25,7 +31,26 @@ function isLetterboxdMovie(value: unknown): value is LetterboxdMovie {
 }
 
 export class LetterboxdService {
-  static async fetchUserFeed(username: string): Promise<LetterboxdFeed> {
+  private static async fetchLiveFeed(
+    username: string,
+  ): Promise<LetterboxdFeed> {
+    const rssUrl = `https://letterboxd.com/${username}/rss/`;
+    const endpoint = `${RSS2JSON_API_URL}?rss_url=${encodeURIComponent(rssUrl)}`;
+    const response = await fetch(endpoint, { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error("Unable to load live Letterboxd activity.");
+    }
+
+    return {
+      movies: parseLetterboxdMovies(await response.json()),
+      lastUpdated: new Date().toISOString(),
+    };
+  }
+
+  private static async fetchCachedFeed(
+    username: string,
+  ): Promise<LetterboxdFeed> {
     const cacheUrl = staticAssetUrl(
       `data/letterboxd/${encodeURIComponent(username.toLowerCase())}.json`,
     );
@@ -42,11 +67,19 @@ export class LetterboxdService {
 
     const lastModified = new Date(response.headers.get("last-modified") ?? "");
     return {
-      movies: data,
+      movies: deduplicateLetterboxdMovies(data),
       lastUpdated: Number.isNaN(lastModified.getTime())
         ? new Date().toISOString()
         : lastModified.toISOString(),
     };
+  }
+
+  static async fetchUserFeed(username: string): Promise<LetterboxdFeed> {
+    try {
+      return await this.fetchLiveFeed(username);
+    } catch {
+      return this.fetchCachedFeed(username);
+    }
   }
 
   static async getRecentMovies(
@@ -54,6 +87,6 @@ export class LetterboxdService {
     limit: number = 10,
   ): Promise<LetterboxdMovie[]> {
     const feed = await this.fetchUserFeed(username);
-    return feed.movies.slice(0, limit);
+    return deduplicateLetterboxdMovies(feed.movies).slice(0, limit);
   }
 }
