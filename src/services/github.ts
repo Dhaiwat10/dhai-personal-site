@@ -34,7 +34,7 @@ export async function fetchGitHubStats(username: string): Promise<GitHubStats> {
   const cacheUrl = staticAssetUrl(
     `data/github/${encodeURIComponent(username.toLowerCase())}.json`,
   );
-  const response = await fetch(cacheUrl, { cache: "force-cache" });
+  const response = await fetch(cacheUrl, { cache: "no-store" });
 
   if (!response.ok) {
     throw new Error("Unable to load cached GitHub activity.");
