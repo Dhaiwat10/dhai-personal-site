@@ -1,0 +1,48 @@
+name: Refresh homepage data
+
+on:
+  schedule:
+    # Run daily at 04:17 UTC. Using an off-peak minute helps avoid scheduler delays.
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-homepage-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Refresh cached data
+        run: bun run cache:homepage
+
+      - name: Commit updated data
+        run: |
+          git add public/data/github/dhaiwat10.json public/data/letterboxd/dhaiwat.json
+
+          if git diff --cached --quiet; then
+            echo "Homepage data is already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Refresh homepage data"
+          git push origin HEAD:main

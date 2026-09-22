@@ -1,30 +1,30 @@
 {
   "followers": 511,
-  "totalStars": 603,
+  "totalStars": 605,
   "latestRepos": [
+    {
+      "name": "smart-mute",
+      "description": null,
+      "url": "https://github.com/Dhaiwat10/smart-mute",
+      "language": "JavaScript",
+      "updatedAt": "2026-09-20T03:34:18Z",
+      "stars": 0
+    },
+    {
+      "name": "pi-jev",
+      "description": "Pi extension for Jev-guided context selection",
+      "url": "https://github.com/Dhaiwat10/pi-jev",
+      "language": "TypeScript",
+      "updatedAt": "2026-09-19T21:30:20Z",
+      "stars": 0
+    },
     {
       "name": "dhai-personal-site",
       "description": "My personal website deployed to IPFS, connected to my ENS",
       "url": "https://github.com/Dhaiwat10/dhai-personal-site",
       "language": "TypeScript",
-      "updatedAt": "2026-07-24T15:51:47Z",
+      "updatedAt": "2026-09-11T10:53:30Z",
       "stars": 6
-    },
-    {
-      "name": "raycast-mouse-cursor-toggle",
-      "description": "A Raycast extension for hiding and showing the macOS mouse cursor.",
-      "url": "https://github.com/Dhaiwat10/raycast-mouse-cursor-toggle",
-      "language": "TypeScript",
-      "updatedAt": "2026-07-21T11:52:08Z",
-      "stars": 0
-    },
-    {
-      "name": "private-watch-party",
-      "description": "Self-hosted, sub-second 4K live streaming to friends over a private Tailscale network — a private alternative to Discord's 720p screen-share cap.",
-      "url": "https://github.com/Dhaiwat10/private-watch-party",
-      "language": "Shell",
-      "updatedAt": "2026-07-21T10:55:26Z",
-      "stars": 0
     }
   ]
 }
