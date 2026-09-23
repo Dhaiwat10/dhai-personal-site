@@ -3,6 +3,14 @@
   "totalStars": 605,
   "latestRepos": [
     {
+      "name": "dhai-personal-site",
+      "description": "My personal website deployed to IPFS, connected to my ENS",
+      "url": "https://github.com/Dhaiwat10/dhai-personal-site",
+      "language": "TypeScript",
+      "updatedAt": "2026-09-23T03:15:19Z",
+      "stars": 6
+    },
+    {
       "name": "smart-mute",
       "description": null,
       "url": "https://github.com/Dhaiwat10/smart-mute",
@@ -17,14 +25,6 @@
       "language": "TypeScript",
       "updatedAt": "2026-09-19T21:30:20Z",
       "stars": 0
-    },
-    {
-      "name": "dhai-personal-site",
-      "description": "My personal website deployed to IPFS, connected to my ENS",
-      "url": "https://github.com/Dhaiwat10/dhai-personal-site",
-      "language": "TypeScript",
-      "updatedAt": "2026-09-11T10:53:30Z",
-      "stars": 6
     }
   ]
 }
