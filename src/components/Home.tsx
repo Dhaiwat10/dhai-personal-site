@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import resumeUrl from "../assets/dhai-resume.pdf?url";
 import { Link } from "react-router-dom";
 import { BLOG_PATH, articlePath } from "../site";
 import { blogPosts } from "../data/blog-posts";
@@ -53,7 +54,7 @@ function Home() {
             GitHub
           </a>
           <a
-            href="https://hackmd.io/@dhaiwat10/ByA1tWTgee"
+            href={resumeUrl}
             className="font-medium text-zinc-500 transition-colors hover:text-white"
             target="_blank"
             rel="noopener noreferrer"
