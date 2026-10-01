@@ -3,11 +3,19 @@
   "totalStars": 606,
   "latestRepos": [
     {
+      "name": "weather-to-go",
+      "description": "A conversational iPhone weather app with practical guidance, comparisons, forecasts, and widgets.",
+      "url": "https://github.com/Dhaiwat10/weather-to-go",
+      "language": "TypeScript",
+      "updatedAt": "2026-10-01T03:09:29Z",
+      "stars": 0
+    },
+    {
       "name": "dhai-personal-site",
       "description": "My personal website deployed to IPFS, connected to my ENS",
       "url": "https://github.com/Dhaiwat10/dhai-personal-site",
       "language": "TypeScript",
-      "updatedAt": "2026-09-29T10:41:09Z",
+      "updatedAt": "2026-09-30T10:29:49Z",
       "stars": 6
     },
     {
@@ -16,14 +24,6 @@
       "url": "https://github.com/Dhaiwat10/smart-mute",
       "language": "JavaScript",
       "updatedAt": "2026-09-20T03:34:18Z",
-      "stars": 0
-    },
-    {
-      "name": "pi-jev",
-      "description": "Pi extension for Jev-guided context selection",
-      "url": "https://github.com/Dhaiwat10/pi-jev",
-      "language": "TypeScript",
-      "updatedAt": "2026-09-19T21:30:20Z",
       "stars": 0
     }
   ]
