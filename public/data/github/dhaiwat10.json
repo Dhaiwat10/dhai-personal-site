@@ -1,7 +1,15 @@
 {
   "followers": 511,
-  "totalStars": 606,
+  "totalStars": 607,
   "latestRepos": [
+    {
+      "name": "dhai-personal-site",
+      "description": "My personal website deployed to IPFS, connected to my ENS",
+      "url": "https://github.com/Dhaiwat10/dhai-personal-site",
+      "language": "TypeScript",
+      "updatedAt": "2026-10-03T09:52:48Z",
+      "stars": 6
+    },
     {
       "name": "not-a-human",
       "description": "A playful reverse CAPTCHA for browser agents.",
@@ -17,14 +25,6 @@
       "language": "TypeScript",
       "updatedAt": "2026-10-02T20:27:22Z",
       "stars": 0
-    },
-    {
-      "name": "dhai-personal-site",
-      "description": "My personal website deployed to IPFS, connected to my ENS",
-      "url": "https://github.com/Dhaiwat10/dhai-personal-site",
-      "language": "TypeScript",
-      "updatedAt": "2026-10-02T10:30:40Z",
-      "stars": 6
     }
   ]
 }
