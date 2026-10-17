@@ -3,19 +3,11 @@
   "totalStars": 607,
   "latestRepos": [
     {
-      "name": "cricket07-browser",
-      "description": "EA Sports Cricket 07 (2006) running in the browser: every function statically recompiled from x86 to C, then WebAssembly, with Direct3D 8 rebuilt on WebGPU. Bring your own copy.",
-      "url": "https://github.com/Dhaiwat10/cricket07-browser",
-      "language": "C",
-      "updatedAt": "2026-10-16T08:58:39Z",
-      "stars": 0
-    },
-    {
-      "name": "openinstinct-qwen",
-      "description": null,
-      "url": "https://github.com/Dhaiwat10/openinstinct-qwen",
+      "name": "redline-riot",
+      "description": "Browser combat-motorcycle racing in the spirit of Road Rash. Online multiplayer, desktop and mobile.",
+      "url": "https://github.com/Dhaiwat10/redline-riot",
       "language": "TypeScript",
-      "updatedAt": "2026-10-16T05:38:18Z",
+      "updatedAt": "2026-10-17T06:15:39Z",
       "stars": 0
     },
     {
@@ -23,8 +15,16 @@
       "description": "My personal website deployed to IPFS, connected to my ENS",
       "url": "https://github.com/Dhaiwat10/dhai-personal-site",
       "language": "TypeScript",
-      "updatedAt": "2026-10-15T09:09:25Z",
+      "updatedAt": "2026-10-16T09:01:42Z",
       "stars": 6
+    },
+    {
+      "name": "cricket07-browser",
+      "description": "EA Sports Cricket 07 (2006) running in the browser: every function statically recompiled from x86 to C, then WebAssembly, with Direct3D 8 rebuilt on WebGPU. Bring your own copy.",
+      "url": "https://github.com/Dhaiwat10/cricket07-browser",
+      "language": "C",
+      "updatedAt": "2026-10-16T08:58:39Z",
+      "stars": 0
     }
   ]
 }
