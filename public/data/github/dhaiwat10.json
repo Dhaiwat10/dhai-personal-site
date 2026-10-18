@@ -1,7 +1,15 @@
 {
   "followers": 509,
-  "totalStars": 607,
+  "totalStars": 608,
   "latestRepos": [
+    {
+      "name": "dhai-personal-site",
+      "description": "My personal website deployed to IPFS, connected to my ENS",
+      "url": "https://github.com/Dhaiwat10/dhai-personal-site",
+      "language": "TypeScript",
+      "updatedAt": "2026-10-17T08:33:35Z",
+      "stars": 6
+    },
     {
       "name": "redline-riot",
       "description": "Browser combat-motorcycle racing in the spirit of Road Rash. Online multiplayer, desktop and mobile.",
@@ -9,14 +17,6 @@
       "language": "TypeScript",
       "updatedAt": "2026-10-17T06:15:39Z",
       "stars": 0
-    },
-    {
-      "name": "dhai-personal-site",
-      "description": "My personal website deployed to IPFS, connected to my ENS",
-      "url": "https://github.com/Dhaiwat10/dhai-personal-site",
-      "language": "TypeScript",
-      "updatedAt": "2026-10-16T09:01:42Z",
-      "stars": 6
     },
     {
       "name": "cricket07-browser",
