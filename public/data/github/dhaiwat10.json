@@ -3,11 +3,19 @@
   "totalStars": 608,
   "latestRepos": [
     {
+      "name": "retro-port",
+      "description": "Claude Code skill: port old Windows PC games you own to the browser (static recompilation to WebAssembly, Direct3D 8 to WebGPU, online 1v1)",
+      "url": "https://github.com/Dhaiwat10/retro-port",
+      "language": "C",
+      "updatedAt": "2026-10-19T07:59:02Z",
+      "stars": 0
+    },
+    {
       "name": "dhai-personal-site",
       "description": "My personal website deployed to IPFS, connected to my ENS",
       "url": "https://github.com/Dhaiwat10/dhai-personal-site",
       "language": "TypeScript",
-      "updatedAt": "2026-10-17T08:33:35Z",
+      "updatedAt": "2026-10-18T08:51:02Z",
       "stars": 6
     },
     {
@@ -16,14 +24,6 @@
       "url": "https://github.com/Dhaiwat10/redline-riot",
       "language": "TypeScript",
       "updatedAt": "2026-10-17T06:15:39Z",
-      "stars": 0
-    },
-    {
-      "name": "cricket07-browser",
-      "description": "EA Sports Cricket 07 (2006) running in the browser: every function statically recompiled from x86 to C, then WebAssembly, with Direct3D 8 rebuilt on WebGPU. Bring your own copy.",
-      "url": "https://github.com/Dhaiwat10/cricket07-browser",
-      "language": "C",
-      "updatedAt": "2026-10-16T08:58:39Z",
       "stars": 0
     }
   ]
