@@ -1,13 +1,13 @@
 {
-  "followers": 509,
-  "totalStars": 608,
+  "followers": 512,
+  "totalStars": 616,
   "latestRepos": [
     {
       "name": "dhai-personal-site",
       "description": "My personal website deployed to IPFS, connected to my ENS",
       "url": "https://github.com/Dhaiwat10/dhai-personal-site",
       "language": "TypeScript",
-      "updatedAt": "2026-10-19T09:53:59Z",
+      "updatedAt": "2026-10-20T09:25:32Z",
       "stars": 6
     },
     {
@@ -16,7 +16,7 @@
       "url": "https://github.com/Dhaiwat10/retro-port",
       "language": "C",
       "updatedAt": "2026-10-19T07:59:02Z",
-      "stars": 0
+      "stars": 5
     },
     {
       "name": "redline-riot",
