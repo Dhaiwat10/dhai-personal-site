@@ -1,13 +1,13 @@
 {
-  "followers": 549,
-  "totalStars": 806,
+  "followers": 553,
+  "totalStars": 809,
   "latestRepos": [
     {
       "name": "dhai-personal-site",
       "description": "My personal website deployed to IPFS, connected to my ENS",
       "url": "https://github.com/Dhaiwat10/dhai-personal-site",
       "language": "TypeScript",
-      "updatedAt": "2026-10-29T10:54:01Z",
+      "updatedAt": "2026-10-30T10:52:09Z",
       "stars": 6
     },
     {
@@ -16,7 +16,7 @@
       "url": "https://github.com/Dhaiwat10/cricket07-browser",
       "language": "C",
       "updatedAt": "2026-10-22T15:23:56Z",
-      "stars": 176
+      "stars": 179
     },
     {
       "name": "retro-port",
