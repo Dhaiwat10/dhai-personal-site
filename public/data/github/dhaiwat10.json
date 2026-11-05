@@ -3,11 +3,19 @@
   "totalStars": 823,
   "latestRepos": [
     {
+      "name": "my-room-2010",
+      "description": "My desk from around 2010, recreated in 3D",
+      "url": "https://github.com/Dhaiwat10/my-room-2010",
+      "language": "JavaScript",
+      "updatedAt": "2026-11-05T06:37:54Z",
+      "stars": 0
+    },
+    {
       "name": "dhai-personal-site",
       "description": "My personal website deployed to IPFS, connected to my ENS",
       "url": "https://github.com/Dhaiwat10/dhai-personal-site",
       "language": "TypeScript",
-      "updatedAt": "2026-11-03T11:55:41Z",
+      "updatedAt": "2026-11-04T12:08:03Z",
       "stars": 6
     },
     {
@@ -17,14 +25,6 @@
       "language": "C",
       "updatedAt": "2026-10-22T15:23:56Z",
       "stars": 192
-    },
-    {
-      "name": "retro-port",
-      "description": "Claude Code skill: port old Windows PC games you own to the browser (static recompilation to WebAssembly, Direct3D 8 to WebGPU, online 1v1)",
-      "url": "https://github.com/Dhaiwat10/retro-port",
-      "language": "C",
-      "updatedAt": "2026-10-19T07:59:02Z",
-      "stars": 19
     }
   ]
 }
