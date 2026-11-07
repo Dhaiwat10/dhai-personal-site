@@ -1,13 +1,13 @@
 {
   "followers": 556,
-  "totalStars": 824,
+  "totalStars": 826,
   "latestRepos": [
     {
       "name": "dhai-personal-site",
       "description": "My personal website deployed to IPFS, connected to my ENS",
       "url": "https://github.com/Dhaiwat10/dhai-personal-site",
       "language": "TypeScript",
-      "updatedAt": "2026-11-05T12:20:12Z",
+      "updatedAt": "2026-11-06T12:06:30Z",
       "stars": 6
     },
     {
@@ -24,7 +24,7 @@
       "url": "https://github.com/Dhaiwat10/cricket07-browser",
       "language": "C",
       "updatedAt": "2026-10-22T15:23:56Z",
-      "stars": 193
+      "stars": 195
     }
   ]
 }
